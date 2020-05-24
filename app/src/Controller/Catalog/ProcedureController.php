@@ -1,20 +1,54 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Catalog;
 
 use App\Entity\Contract;
+use App\Service\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use \Memcached;
+use Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler;
 
-class DefaultController extends AbstractController
+use Zend\Stdlib\ArrayObject;
+
+class ProcedureController extends AbstractController
 {
-    public function index()
+    public function index(string $tab, Auth $user, Session $session)
     {
-        $connection = $this->getDoctrine()->getConnection('catalog_223');
+        print_r($user->user());
+//$session->start();
+//print_r("<br>");
+//        print_r($session->getId());
+//        print_r($_SESSION);
+//        //$session->start();
+//      $session->set('attribute-name', 5678);
+//        //$_SESSION = [];
+//        print_r($session->all());
+       // print_r($session->all());
+//        $cache = new \Memcached();
+//        $cache->addServer('sectionksmemcachedhost', '11211');
+//        $keys = $cache->getAllKeys();
+//        $cache->getDelayed($keys);
+//        $store = $cache->fetchAll();
+//        print_r("<pre>");
+//        print_r($store);
+//        print_r("</pre>");
+//        //print_r($asd->fetchAll());
+//        exit;
+        //$connection = $this->getDoctrine()->getConnection('catalog_223');
         //$result = $connection->fetchAll('SELECT price FROM contract');
         //print_r($result);
         //return new Response('Hello!');
+
+        $contracts = $this->getDoctrine()
+            ->getRepository(Contract::class, 'catalog_223')
+            ->findBy([], null, 20);
+
         return $this->render('index.html.twig', [
-            'name' => '2134',
+            'name' => $tab,
+            'contracts' => $contracts
         ]);
     }
 

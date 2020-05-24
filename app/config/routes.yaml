@@ -1,3 +1,49 @@
 index:
     path: /2223/catalog/
-    controller: App\Controller\DefaultController::index
+    controller: App\Controller\DefaultController::show
+
+#Catalog controller
+
+catalog_default:
+    path: /beta/223/catalog/procedure/{tab}
+    controller: App\Controller\Catalog\ProcedureController::index
+    defaults: { tab: 'all' }
+    methods: GET
+
+#catalog_template:
+#    path: /2223/catalog/
+#    controller: App\Controller\Catalog\
+#    methods: GET
+
+
+
+
+
+
+#Upload controller
+
+#mteFormUpload @TODO Реализовать
+#    path: /223/catalog/mte-form/upload
+#    controller: MteForm\Controller\Upload:upload
+
+#mteFormUploadContractDocument:
+#    path: /2223/catalog/mte-form/upload-contract/
+#    controller: App\Controller\Catalog\UploadController::uploadContractDocument
+#    methods: GET
+
+#mteFormGet: @TODO Реализовать
+#    path: /223/catalog/mte-form/get
+#    controller: MteForm\Controller\Upload::get
+#    methods: GET
+
+#mteFormDelete: @TODO Реализовать
+#    path: /223/catalog/mte-form/delete
+#    controller: MteForm\Controller\Upload::delete
+#    methods: GET
+
+#mteFormProgress: @TODO Реализовать
+#    path: /223/catalog/mte-form/progress
+#    controller: MteForm\Controller\Upload::progress
+#    methods: GET
+
+

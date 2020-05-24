@@ -1,9 +1,24 @@
 <?php
-
+//$cache = new \Memcached();
+//$cache->addServer('sectionksmemcachedhost', '11211');
+//$keys = $cache->getAllKeys();
+//$cache->getDelayed($keys);
+//$store = $cache->fetchAll();
+//print_r("<pre>");
+//print_r($store);
+//print_r("</pre>");
+////exit;
+//session_start();
+////$_SESSION['hgf'] = 543;
+//print_r($_SESSION);
+//print_r(session_save_path());
+//
+//session_write_close();
+////print_r(session_get_cookie_params());
+//exit;
 use App\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
-
 require dirname(__DIR__).'/config/bootstrap.php';
 
 if ($_SERVER['APP_DEBUG']) {

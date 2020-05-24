@@ -1,6 +1,6 @@
 FROM php:7.4-fpm-buster
 
-RUN buildDeps="autoconf file libc-dev libtool libxml2 libxml2-dev mc net-tools libssl-dev curl automake cmake g++ git libpq-dev libmagickwand-dev libzip-dev libonig-dev librabbitmq-dev libreadline-dev libcurl4-openssl-dev  libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev pkg-config libmagickwand-6.q16-dev libldap2-dev wget zip unzip libaio1 ssh-client zlib1g-dev" && \
+RUN buildDeps="autoconf file libc-dev libtool libxml2 libxml2-dev mc net-tools libssl-dev curl automake cmake g++ git libpq-dev libmagickwand-dev libzip-dev libonig-dev librabbitmq-dev libreadline-dev libcurl4-openssl-dev libmemcached-dev zlib1g-dev libicu-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev pkg-config libmagickwand-6.q16-dev libldap2-dev wget zip unzip libaio1 ssh-client zlib1g-dev" && \
     apt-get update && \
     apt-get install -y $buildDeps --no-install-recommends && \
     pecl install -o -f redis && \
@@ -25,13 +25,16 @@ RUN buildDeps="autoconf file libc-dev libtool libxml2 libxml2-dev mc net-tools l
         sockets \
         intl
 
+RUN pecl install memcached-3.1.5 \
+    && docker-php-ext-enable memcached
+
 RUN echo 'start rabbit install'
 RUN git clone git://github.com/alanxz/rabbitmq-c.git \
     && cd rabbitmq-c \
     && mkdir build && cd build \
     && cmake -DENABLE_SSL_SUPPORT=OFF .. \
     && cmake --build . --target install  \
-    && pecl install amqp imagick xdebug igbinary redis \
+    && pecl install amqp xdebug igbinary \
     && rm -rf ../rabbitmq-c \
     && docker-php-ext-enable amqp
 #RUN git clone git://github.com/alanxz/rabbitmq-c.git \

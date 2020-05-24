@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    memcached_host: sectionksmemcachedhost
+    memcached_port: 11217
+    memcached_prefix: sectionks.sess.
+    memcached_expire: 14400
 
 services:
     # default configuration for services in *this* file
@@ -25,3 +29,23 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    session.handler.memcached:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
+        arguments: [ "@session.memcached", { prefix: '%memcached_prefix%', expiretime: '%memcached_expire%' } ]
+
+    session.memcached:
+        class: Memcached
+        arguments:
+            - '%memcached_prefix%'
+        calls:
+            - [ addServer, [ '%memcached_host%', '%memcached_port%' ]]
+    App\EventListener\RequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 20000 }
+    session:
+        public: true
+        class: Symfony\Component\HttpFoundation\Session\Session
+        arguments: ['@session.storage', '@session.namespacedattributebag', '@session.flash_bag']
+
+    session.namespacedattributebag:
+        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag

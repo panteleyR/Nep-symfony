@@ -1,47 +1,49 @@
 version: '3'
 services:
-  web:
-    image: nginx
-    ports:
-      - 80:80
-    working_dir: /code
-    volumes:
-      - ../app:/code
-      - ./images/web/logs:/var/logs/nginx
-      - ./images/web/conf.d:/etc/nginx/conf.d
-      - ./../../:/srv/www/
-    depends_on:
-      - fpm
+#  web:
+#    image: nginx
+#    ports:
+#      - 80:80
+#    working_dir: /code
+#    volumes:
+#      - ../app:/code
+#      - ./images/web/logs:/var/logs/nginx
+#      - ./images/web/conf.d:/etc/nginx/conf.d
+#      - ./../../:/srv/www/
+#    depends_on:
+#      - fpm
 
-  fpm:
+  beta.catalog.fpm:
     build: ./images/php
     volumes:
       - ../app:/code
       - /Users/lilith/.ssh:/root/.ssh
+      - ./images/php/conf/php.ini:/usr/local/etc/php/php.ini
     working_dir: /code
     extra_hosts:
       - "ftest-crypto.etp-ets.ru:${CRYPTO_HOST}"
     env_file:
       - .env
-    depends_on:
+#    depends_on:
 #      - sphinx
-      - mysql
+#      - mysql
 
-  mysql:
-    image: mysql:5.6
-    ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-    volumes:
-      - mysql.data:/var/lib/mysql:rw
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
+#  mysql:
+#    image: mysql:5.6
+#    ports:
+#      - 3306:3306
+#    environment:
+#      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+#      MYSQL_USER: ${MYSQL_USER}
+#      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#      MYSQL_DATABASE: ${MYSQL_DATABASE}
+#    volumes:
+#      - mysql.data:/var/lib/mysql:rw
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#      timeout: 20s
+#      retries: 10
+
 #  sphinx:
 #    build: ./images/sphinxsearch/
 #    environment:
@@ -75,5 +77,5 @@ services:
 
 volumes:
 #  sphinx.data:
-  mysql.data:
+#  mysql.data:
   rabbitmq.data:
