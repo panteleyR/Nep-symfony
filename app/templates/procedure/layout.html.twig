@@ -1,0 +1,70 @@
+{% extends 'layoutMain.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('beta/223/assets/css/procedure.css') }}">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container">
+            <h1>Pеестр опубликованных закупок по 223-ФЗ</h1>
+            <div class="alert alert-info">
+                <strong><a href="https://www.fabrikant.ru/trades/procedure/search/?filter_id=5">Единый поиск закупок по 223-ФЗ, 223-ФЗ у СМСП, Росатом</a></strong>
+            </div>
+
+            <div class="catalog-tabs">
+                {% if tab is same as('all') %}
+                    <a class="tab active">Все</a>
+                {% else %}
+                    <a class="tab" href="/beta/223/catalog/procedure" >Все</a>
+                {% endif %}
+
+                {% if tab is same as('published') %}
+                    <a class="tab active">Прием заявок</a>
+                {% else %}
+                    <a class="tab" href="/beta/223/catalog/procedure/published">Прием заявок</a>
+                {% endif %}
+
+                {% if tab is same as('trades') %}
+                    <a class="tab active">Ожидание торгов</a>
+                {% else %}
+                    <a class="tab" href="/beta/223/catalog/procedure/trades">Ожидание торгов</a>
+                {% endif %}
+
+                {% if tab is same as('commission') %}
+                    <a class="tab active">Идут торги</a>
+                {% else %}
+                    <a class="tab" href="/beta/223/catalog/procedure/commission">Идут торги</a>
+                {% endif %}
+
+                {% if tab is same as('contract') %}
+                    <a class="tab active">Работа комиссии</a>
+                {% else %}
+                    <a class="tab" href="/beta/223/catalog/procedure/contract">Работа комиссии</a>
+                {% endif %}
+
+                {% if tab is same as('finished') %}
+                    <a class="tab active">Заключение договора</a>
+                {% else %}
+                    <a class="tab" href="/beta/223/catalog/procedure/finished">Заключение договора</a>
+                {% endif %}
+            </div>
+
+            <div class="simple-search-panel">
+                <form action="" method="get">
+                    <div class="search-row">
+                        <input  class="search-query" type="text" value="" name="q" placeholder="Параметры поиска: Номер извещения, организатор закупки, наименование закупки">
+                        <div class="input-group-btn">
+                            <button type="submit"  class="btn btn-default search-button">Найти</button>
+                        </div>
+                    </div>
+                    <div class="advanced-search-button">
+                        <a class="pull-right collapsed">Расширенный поиск</a>
+                    </div>
+                </form>
+            </div>
+
+            {{ include('procedure/catalog.html.twig') }}
+        </div>
+    </main>
+{% endblock %}

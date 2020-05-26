@@ -1,0 +1,196 @@
+main .alert {
+    padding: 15px;
+    margin-bottom: 17px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+main .alert-info {
+    background: #d9edf7;
+    border-color: #9acfea;
+    color: #31708f;
+}
+
+main .catalog-tabs {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid #dddddd;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+main .catalog-tabs .tab {
+    margin-right: 2px;
+    line-height: 1.428571429;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+main .catalog-tabs .tab:hover {
+    text-decoration: none;
+    background-color: #eeeeee;
+    border-color: #eeeeee #eeeeee #dddddd;
+}
+
+main .catalog-tabs .tab.active, main .catalog-tabs .tab.active:hover {
+    background: none;
+    color: #555555;
+    cursor: default;
+    border-color: #eeeeee #eeeeee #fff;
+}
+
+main .simple-search-panel {
+    margin-bottom: 0;
+    border-radius: 4px;
+    border-color: #dddddd;
+    overflow: hidden;
+    background: #f5f5f5;
+    color: #333333;
+    padding: 10px 15px;
+}
+
+main .simple-search-panel form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main .simple-search-panel form .search-row{
+    display: flex;
+
+    width: 66%;
+}
+
+main .simple-search-panel form .search-row .search-query{
+    height: 31px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+main .simple-search-panel form .search-row .input-group-btn button{
+    height: 100%;
+    padding: 6px 12px;
+}
+
+main .simple-search-panel form .advanched-search-button {
+    width: 66%;
+}
+
+
+main .catalog-table .head {
+    display: flex;
+    justify-content: space-between;
+}
+
+main .catalog-table .head {
+    display: flex;
+    justify-content: space-between;
+}
+
+main .catalog-table .table {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main .catalog-table .table .row-header .glyphicon{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+}
+
+main .catalog-table .table .row-header .glyphicon-sort:before {
+    content: "\e150";
+}
+
+main .catalog-table .table .row{
+    display: flex;
+    width: 100%;
+}
+
+main .catalog-table .table .row .cell{
+    padding: 10px;
+    border: 1px solid #dddddd;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(1){
+    font-size: 9px;
+    width: 5%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(2){
+    width: 10%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(3){
+    width: 13%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(4){
+    width: 6%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(5){
+    width: 7%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(6){
+    width: 7%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(7){
+    width: 7%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(8){
+    width: 10%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(9){
+    width: 10%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(10){
+    width: 10%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(11){
+    width: 5%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(12){
+    width: 5%;
+}
+
+main .catalog-table .table .row > .cell:nth-of-type(13){
+    width: 5%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,10 +4,9 @@ namespace App\Entity\Sectionks;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\Sectionks\UserRepository")
- * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="App\Repository\Sectionks\MemberRepository")
  */
-class User
+class Member
 {
     /**
      * @ORM\Id
@@ -36,14 +35,12 @@ class User
      */
     private ?string $middleName;
 
+    private ?Organization $organization;
+
     /**
      * @ORM\Column(type="string")
      */
     private ?string $certificateSerial;
-
-    private ?Member $currentMember;
-
-    private ?Organization $currentOrganization;
 
     public function getId(): int
     {
@@ -117,36 +114,15 @@ class User
         return $this;
     }
 
-    public function setCurrentMember(Member $member)
+    public function getOrganization(): Organization
     {
-        $this->currentMember = $member;
-        if ($this->currentOrganization) {
-            $this->setCurrentOrganization($member->getOrganization());
-        }
+        return $this->organization;
+    }
+
+    public function setOrganization(Organization $organization): self
+    {
+        $this->organization = $organization;
+
         return $this;
-    }
-
-    public function getCurrentMember(): ?Member
-    {
-        if ($this->currentMember) {
-            return $this->currentMember;
-        }
-
-        return null;
-    }
-
-    public function setCurrentOrganization(Organization $organization)
-    {
-        $this->currentOrganization = $organization;
-        return $this;
-    }
-
-    public function getCurrentOrganization(): ?Organization
-    {
-        if ($this->currentOrganization) {
-            return $this->currentOrganization;
-        }
-
-        return null;
     }
 }

@@ -2,37 +2,18 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use Zend\Stdlib\ArrayObject;
 use App\Entity\Sectionks\User as UserEntity;
-use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage;
 
 class Auth
 {
     protected ?UserEntity $user = null;
 
-    public function __construct()
-    {
-        //@TODO выебнуть это отсюда
-//        ini_set('session.save_handler', 'files');
-//        ini_set('session.save_path', '/tmp');
-//        session_start();
-
-// Заставьте Symfony состыковаться с этой существующей сессией
-//        $sessionZF = new Session(new PhpBridgeSessionStorage());
-
-// Теперь Symfony будет состыковываться с существующей PHP сессией
-//        $sessionZF->start();
-
-        // 2 вариант
-//        $natSes = new NativeSessionStorage();
-    //    $this->extractDataFromSession();
-    }
-
     public function extractDataFromJson(string $data)
     {
-        $userData = \json_decode($_SESSION['activeUserData']->data)->user;
+        $activeData = \json_decode($data);
+        $userData = $activeData->user;
+        $organization = $activeData->organization;
         $this->user = new UserEntity();
         $this->user->setId($userData->id);
         $this->user->setFullName($userData->fullName ?? '');
@@ -57,8 +38,15 @@ class Auth
         return $this->user ? true : false;
     }
 
+    public function isGuest(): bool
+    {
+        return $this->user ? false : true;
+    }
+
     public function user(): ?UserEntity
     {
         return $this->user;
     }
+
+    //@TODO сделать автоматическое заполнение организации и мемберс для пользователя
 }

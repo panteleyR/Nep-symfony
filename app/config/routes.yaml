@@ -8,7 +8,25 @@ catalog_default:
     path: /beta/223/catalog/procedure/{tab}
     controller: App\Controller\Catalog\ProcedureController::index
     defaults: { tab: 'all' }
-    methods: GET
+    methods: GET, POST
+
+catalog_public:
+    path: /beta/223/catalog/procedure/public/{tab}
+    controller: App\Controller\Catalog\ProcedureController::index
+    defaults: { tab: 'all' }
+    methods: GET, POST
+
+catalog_personal:
+    path: /beta/223/catalog/procedure/personal/{tab}
+    controller: App\Controller\Catalog\ProcedureController::personal
+    defaults: { tab: 'all' }
+    methods: GET, POST
+
+catalog_operator:
+    path: /beta/223/catalog/procedure/operator/{tab}
+    controller: App\Controller\Catalog\ProcedureController::operator
+    defaults: { tab: 'all' }
+    methods: GET, POST
 
 #catalog_template:
 #    path: /2223/catalog/
@@ -22,7 +40,7 @@ catalog_default:
 
 #Upload controller
 
-#mteFormUpload @TODO Реализовать
+#mteFormUpload
 #    path: /223/catalog/mte-form/upload
 #    controller: MteForm\Controller\Upload:upload
 
@@ -31,17 +49,17 @@ catalog_default:
 #    controller: App\Controller\Catalog\UploadController::uploadContractDocument
 #    methods: GET
 
-#mteFormGet: @TODO Реализовать
+#mteFormGet:
 #    path: /223/catalog/mte-form/get
 #    controller: MteForm\Controller\Upload::get
 #    methods: GET
 
-#mteFormDelete: @TODO Реализовать
+#mteFormDelete:
 #    path: /223/catalog/mte-form/delete
 #    controller: MteForm\Controller\Upload::delete
 #    methods: GET
 
-#mteFormProgress: @TODO Реализовать
+#mteFormProgress:
 #    path: /223/catalog/mte-form/progress
 #    controller: MteForm\Controller\Upload::progress
 #    methods: GET

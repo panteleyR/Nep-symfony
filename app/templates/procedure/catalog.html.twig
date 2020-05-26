@@ -1,0 +1,66 @@
+<div class="catalog-table">
+    <div class="head">
+        <div class="pagination">
+
+        </div>
+
+        <div class="buttons">
+
+        </div>
+
+        <div class="information">
+            <div>всего: {{ (countProcedure ?: '0') }}</div>
+            <div>на странице {{ (limit ?: 10 ) }}</div>
+        </div>
+    </div>
+    <div class="table">
+        {% set tableHeaders = [
+            {'name': 'Тип', 'type': ''},
+            {'name': 'Наименование закупки (номер извещения)'},
+            {'name': 'Наименование лота (номер лота)'},
+            {'name': 'Начальная (макс.) цена', 'type': 'sortable'},
+            {'name': 'Организатор закупки', 'type': 'sortable'},
+            {'name': 'Заказчик'},
+            {'name': 'Дата и время публикации', 'type': 'sortable'},
+            {'name': 'Дата и время окончания подачи заявок', 'type': 'sortable'},
+            {'name': 'Дата и время окончания срока рассмотрения заявок', 'type': 'sortable'},
+            {'name': 'Дата и время начала торгов', 'type': 'sortable'},
+            {'name': 'Статус'},
+            {'name': 'События'},
+            {'name': 'Действия'},
+        ] %}
+        <div class="row row-header">
+            {% for head in tableHeaders %}
+                {% if (head.type ?? 'default')  == 'sortable' %}
+                    {% if (head.code ?? 'default')  == order and dir == 'asc' %}
+                        <div class="cell">{{ head.name }} <span class="glyphicon glyphicon-sort-by-attributes"></span></div>
+                    {% elseif (head.code ?? 'default')  == order and dir == 'desc' %}
+                            <div class="cell">{{ head.name }} <span class="glyphicon glyphicon-sort-by-attributes-alt"></span></div>
+
+                    {% else %}
+                        <div class="cell">{{ head.name }} <span class="glyphicon glyphicon-sort"></span></div>
+                    {% endif %}
+                {% else %}
+                    <div class="cell">{{ head.name }}</div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% for procedure in procedures %}
+            <div class="row">
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+                <div class="cell">{{ procedure.name ?? '' }}{{ procedure.registrationNumber ?? (procedure.oosRegistrationNumber ?? '') }}</div>
+                <div class="cell">lots</div>
+                <div class="cell">max price</div>
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+                <div class="cell">{{ procedure.placerFullName ?? '' }}</div>
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+                <div class="cell">{{ procedure.status.name ?? '' }}</div>
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+                <div class="cell">{{ procedure.type.name ?? '' }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

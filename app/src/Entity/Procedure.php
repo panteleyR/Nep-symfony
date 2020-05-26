@@ -4,7 +4,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ContractRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProcedureRepository")
+ * @ORM\Table(name="procedure_223")
  */
 class Procedure
 {
@@ -16,36 +17,111 @@ class Procedure
     private int $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="procedure_223")
      */
-    private int $statusId;
+    private ?Status $status = null;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="procedure_223")
      */
-    private float $price;
+    private ?Type $type = null;
 
-    public function getStatusId(): int
+    /**
+     * @ORM\Column(type="string")
+     */
+    private ?string $name = null;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private ?string $registrationNumber = null;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private ?string $oosRegistrationNumber = null;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private ?string $placerFullName = null;
+
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setStatusId(int $statusId): self
+    public function setId(int $id): self
     {
-        $this->statusId = $statusId;
-
+        $this->id = $id;
         return $this;
     }
 
-    public function getPrice(): float
+    public function getStatus(): ?Status
     {
-        return $this->price;
+        return $this->status;
     }
 
-    public function setPrice(float $price): self
+    public function setStatus(Status $status): self
     {
-        $this->price = $price;
-
+        $this->status = $status;
         return $this;
     }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(Type $type): self
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getRegistrationNumber(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setRegistrationNumber(string $registrationNumber): self
+    {
+        $this->registrationNumber = $registrationNumber;
+        return $this;
+    }
+
+    public function getOosRegistrationNumber(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setOosRegistrationNumber(string $oosRegistrationNumber): self
+    {
+        $this->oosRegistrationNumber = $oosRegistrationNumber;
+        return $this;
+    }
+
+    public function getPlacerFullName(): ?string
+    {
+        return $this->placerFullName;
+    }
+
+    public function setPlacerFullName(string $placerFullName): self
+    {
+        $this->placerFullName = $placerFullName;
+        return $this;
+    }
+
 }

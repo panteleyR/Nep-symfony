@@ -1,0 +1,276 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+<header>
+    <div class="container top-toolbar">
+
+        <div class="time">
+            <div class="pull-left">
+                <span class="ui-theme-icon ui-icon-datetime"></span>
+            </div>
+            <div class="pull-left">
+                <span class="dateTime-container" id="serverDateTime"><span id="serverDateTime-day" class="serverDateTime-day">25.</span><span id="serverDateTime-month" class="serverDateTime-month">05.</span><span id="serverDateTime-year" class="serverDateTime-year">2020</span><span id="serverDateTime-hour" class="serverDateTime-hour">03:</span><span id="serverDateTime-minute" class="serverDateTime-minute">41:</span><span id="serverDateTime-second" class="serverDateTime-second">14</span></span>
+                <span class="dateTime-timezone" id="serverDateTime-timezone">(MSK+00:00)</span><br>
+                <small>серверное время</small>
+                <script src="/date-time/init/timezone/+00:00/id/serverDateTime/?1590362559" type="text/javascript"></script>
+            </div>
+        </div>
+
+        <div class="auth">
+            {% if not auth.isGuest() %}
+                <div class="pull-left navbar-user">
+                    <strong>{{ auth.user().fullname }}</strong><br>
+                    <small title="Акционерное общество «Электронные торговые системы»">Оператор: Акционерное общество «Электронные торговые системы»</small>
+                </div>
+                <div class="navbar-form navbar-right navbar-exit">
+                    <a class="btn btn-default exit-dialog" href="/logout">Выход</a>
+                </div>
+            {% else %}
+            <form action="/login" method="POST" class="default-auth">
+                <div class="form-group">
+                    <input type="text" name="login[username]" class="form-control navbar-input" placeholder="Логин">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="login[password]" class="form-control navbar-input">
+                </div>
+                <div class="enter-group-btn">
+                    <button type="submit" class="btn btn-danger">Вход</button>
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href="https://ntest94.etp-ets.ru/account/access/password-recovery/">Забыли пароль?</a></li>
+                    </ul>
+                </div>
+            </form>
+
+            <div class="gosuslugi-auth">
+                <a href="/api/esia/auth" class="btn btn-default btn-esia">Войти через <img alt="Госуслуги" height="16" src="/assets/images/gosuslugi.png"></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="information">
+            <div class="log">
+                <a href="https://ntest44.etp-ets.ru" title="Главная страница" target="_self">
+                    <img src="/assets/images/logo.png" alt="">
+                </a>
+            </div>
+            <div class="contact">
+                <h5>+7 (495) 514-02-04</h5>
+                <a href="https://ntest94.etp-ets.ru/wiki/ticket/add/" title="Обращение в техподдержку">Обращение в техподдержку</a>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block nav %}
+    <nav>
+        <div class="container">
+            <ul class="navigation">
+                <li>
+                    <a href="/procedure/catalog/">Закупки по 44-ФЗ</a>
+                    <ul>
+                        <li>
+                            <a href="/procedure/catalog/">Закупки по 44-ФЗ (аукционы)</a>
+                        </li>
+                        <li>
+                            <a href="/44/catalog/procedure">Закупки по 44-ФЗ (конкурсы, ЗК, ЗП)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/223/catalog/procedure">Закупки по 223-ФЗ</a>
+                    <ul>
+                        <li>
+                            <a href="/223/catalog/procedure">Секция Национальной электронной площадки</a>
+                        </li>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/auction/catalog/all223/">Секция Национальной электронной площадки (до 21.05.2018)</a>
+                        </li>
+                        <li>
+                            <a href="https://www.fabrikant.ru/trades/procedure/search/" target="_blank">Секция ЭТС-Фабрикант</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://www.etp-torgi.ru" target="_blank">Имущественные торги</a>
+                </li>
+                <li>
+                    <a href="/organization/catalog/supplier">Реестры</a>
+                    <ul>
+                        <li>
+                            <a href="/organization/catalog/customer">Заказчики по 44-ФЗ</a>
+                        </li>
+                        <li>
+                            <a href="/organization/catalog/customer-223">Заказчики по 223-ФЗ</a>
+                        </li>
+                        <li>
+                            <a href="/organization/catalog/customer/active/specialized-organizations">Специализированные организации</a>
+                        </li>
+                        <li>
+                            <a href="/organization/catalog/supplier">Участники</a>
+                        </li>
+                        <li>
+                            <a href="/organization/catalog/eruz">Участники (ЕРУЗ)</a>
+                        </li>
+                        <li>
+                            <a href="/bank/public-registry">Кредитные организации</a>
+                        </li>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/content/auth-center/list/fz/94/" target="_blank">Удостоверяющие центры</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/supplier/" target="_blank">Участникам</a>
+                    <ul>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/supplier/" target="_blank">Аккредитация по 223-ФЗ</a>
+                        </li>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/authority-supplier/" target="_blank">Регистрация доверенности</a>
+                        </li>
+                        <li>
+                            <a href="/fast_predcval" target="_blank">Ускоренная предквалификация</a>
+                        </li>
+                        <li>
+                            <a href="https://fabrikant.ru/eruz_registration" target="_blank">Сопровождение регистрации в ЕРУЗ</a>
+                        </li>
+                        <li>
+                            <a href="https://fabrikant.ru/bank_guarantee" target="_blank">Банковские гарантии</a>
+                        </li>
+                        <li>
+                            <a href="https://www.fabrikant.ru/edm/edo" target="_blank">ЭДО и отчетность</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/authority-customer223/" target="_blank">Заказчикам по 223-ФЗ</a>
+                    <ul>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/authority-customer223/" target="_blank">Регистрация доверенности</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://fkr.etp-ets.ru/procedure/catalog/?&amp;procedureTypeId=10">Капитальный ремонт</a>
+                    <ul>
+                        <li>
+                            <a href="/repair/qualified/catalog/">Реестр квалифицированных подрядных организаций</a>
+                        </li>
+                        <li>
+                            <a href="/documentation?categoryId=5">Документация</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://ntest94.etp-ets.ru/wiki/ticket/add/" target="_blank">Поддержка</a>
+                    <ul>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/wiki/ticket/add/" target="_blank">Обращение в техподдержку</a>
+                        </li>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/index/test-page/" target="_blank">Проверка настроек</a>
+                        </li>
+                        <li>
+                            <a href="/operator/content/article/view/129/">Мастер настройки ЭТП</a>
+                        </li>
+                        <li>
+                            <a href="https://ntest94.etp-ets.ru/wiki/page/list/" target="_blank">Часто задаваемые вопросы</a>
+                        </li>
+                        <li>
+                            <a class="menu-calendar" href="/">Производственный календарь</a>
+                        </li>
+                        <li>
+                            <a href="/content/article/view/1/">Информационная безопасность</a>
+                        </li>
+                        <li>
+                            <a href="/documentation">Документация</a>
+                        </li>
+                        <li>
+                            <a href="/bank/user/token">Регистрация пользователя кредитной организации</a>
+                        </li>
+                        <li>
+                            <a href="/subscribe">Подписка на закупки Росатома</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
+
+{% block footer %}
+    <footer>
+        <div class="menu">
+            <div class="row">
+                <a href="/">Главная страница</a>
+                <ul>
+                    <li>
+                        <a href="https://ntest44.etp-ets.ru/procedure/catalog/">Закупки по 44-ФЗ (аукционы)</a>
+                    </li>
+                    <li>
+                        <a href="/44/catalog/procedure" target="_blank">Закупки по 44-ФЗ (конкурсы, ЗК, ЗП)</a>
+                    </li>
+                    <li>
+                        <a href="/223/catalog/procedure" target="_blank">Закупки по 223-ФЗ</a>
+                    </li>
+                    <li>
+                        <a href="https://www.etp-torgi.ru/market/?action=list_market_auctions&amp;market_type=privatization_ets_market" target="_blank">Имущественные торги</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <a href="/organization/catalog/supplier">Реестры</a><ul><li><a href="/organization/catalog/customer">Заказчики по 44-ФЗ</a></li>
+                        <li><a href="/organization/catalog/customer-223">Заказчики по 223-ФЗ</a></li>
+                        <li><a href="/organization/catalog/customer/active/specialized-organizations">Специализированные организации</a></li>
+                        <li><a href="/organization/catalog/supplier">Участники</a></li>
+                        <li><a href="/organization/catalog/eruz">Участники (ЕРУЗ)</a></li>
+                        <li><a href="/bank/public-registry">Кредитные организации</a></li>
+                        <li><a href="https://ntest94.etp-ets.ru/content/auth-center/list/fz/94/" target="_blank">Удостоверяющие центры</a></li></ul>
+            </div>
+            <div class="row">
+                <a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/supplier/" target="_blank">Участникам</a><ul><li><a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/supplier/" target="_blank">Аккредитация по 223-ФЗ</a></li>
+                        <li><a href="https://ntest94.etp-ets.ru/account/registration/introduction/formType/authority-supplier/" target="_blank">Регистрация доверенности</a></li>
+                        <li><a href="/add-certificate/">Загрузка сертификата</a></li>
+                        <li><a href="/fast_predcval" target="_blank">Ускоренная предквалификация</a></li>
+                        <li><a href="https://fabrikant.ru/eruz_registration" target="_blank">Сопровождение регистрации в ЕРУЗ</a></li>
+                        <li><a href="https://fabrikant.ru/bank_guarantee" target="_blank">Банковские гарантии</a></li>
+                        <li><a href="https://www.fabrikant.ru/edm/edo" target="_blank">ЭДО и отчетность</a></li></ul>
+            </div>
+            <div class="row">
+                <a href="https://ntest94.etp-ets.ru/wiki/ticket/add/" target="_blank">Поддержка</a><ul><li><a href="https://ntest94.etp-ets.ru/wiki/ticket/add/" target="_blank">Обращение в техподдержку</a></li>
+                        <li><a href="https://ntest94.etp-ets.ru/index/test-page/" target="_blank">Проверка настроек</a></li>
+                        <li><a href="/operator/content/article/view/129/">Мастер настройки ЭТП</a></li>
+                        <li><a href="https://ntest94.etp-ets.ru/wiki/page/list/" target="_blank">Часто задаваемые вопросы</a></li>
+                        <li><a class="menu-calendar" href="/">Производственный календарь</a></li>
+                        <li><a href="/content/article/view/1/">Информационная безопасность</a></li>
+                        <li><a href="/documentation">Документация</a></li>
+                        <li><a href="/bank/user/token">Регистрация пользователя кредитной организации</a></li>
+                        <li><a href="/subscribe">Подписка на закупки Росатома</a></li></ul>
+            </div>
+        </div>
+        <div class="information">
+            <div class="row">
+                АО "ЭТС" <br>
+                <small>©&nbsp;2010-2020</small>
+            </div>
+            <div class="row">
+                123112, г. Москва, ул. Тестовская, д. 10<br>
+                <a href="http://maps.yandex.ru/-/CZH5vA0K" target="_blank" title="Адрес на карте">Адрес на карте</a>
+            </div>
+            <div class="row">
+                Телефон: +7 (495) 514-02-04<br>Факс: +7(495) 213-32-55
+            </div>
+            <div class="row">
+                <a href="https://ntest94.etp-ets.ru/wiki/ticket/add/" target="_blank" title="Отправить письмо">Отправить
+                    письмо</a>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
